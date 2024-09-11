@@ -1,6 +1,8 @@
 # dashboard_window.py
 import tkinter as tk
 from src.view.usuario.cadastro_window import CadastroWindow
+from src.view.pedidos_brf.index import PedidosBrfWindow
+
 
 class DashboardWindow(tk.Frame):
     def __init__(self, parent, session, username, funcoes_acesso, return_to_main_menu):
@@ -52,6 +54,10 @@ class DashboardWindow(tk.Frame):
     def function2(self):
         # Implementar a lógica para a funcionalidade 2
         print("Funcionalidade 2")
+        self.clear_screen()  # Remove o conteúdo atual da tela
+        pedidos_brf_window = PedidosBrfWindow(self, self.session, self.return_to_dashboard)  # Passa a sessão aqui
+        pedidos_brf_window.grid(row=0, column=0, sticky="nsew")
+        
 
     def clear_screen(self):
         """Remove todos os widgets da tela."""
