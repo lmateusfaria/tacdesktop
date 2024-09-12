@@ -1,5 +1,7 @@
 import tkinter as tk
 from src.controller.pedidos_brf.index import on_click_contar_pedidos
+from src.controller.components.placeholderentry import PlaceholderEntry
+
 
 class PedidosBrfWindow(tk.Frame):
     def __init__(self, parent, session, callback):
@@ -24,10 +26,39 @@ class PedidosBrfWindow(tk.Frame):
         self.entry_data = tk.Entry(self, takefocus=True)
         self.entry_data.grid(row=2, column=1, padx=0, pady=0)
         
+        self.label_horario = tk.Label(self, text="Selecione a hora inicial:")
+        self.label_horario.grid(row=3, column=1, padx=0, pady=0)
+        
+        self.entry_horas = PlaceholderEntry(self, takefocus=True, placeholder="Horas")
+        self.entry_horas.grid(row=4, column=0, padx=0, pady=0)
+        
+        self.entry_minutos = PlaceholderEntry(self, takefocus=True, placeholder="Minutos")
+        self.entry_minutos.grid(row=4, column=1, padx=0, pady=0)
+        
+        
+        self.entry_segundos = PlaceholderEntry(self, takefocus=True, placeholder="Segundos")
+        self.entry_segundos.grid(row=4, column=2, padx=0, pady=0)      
+        
         self.label_resultado = tk.Label(self, text="Quantidade de pedidos: ")
-        self.label_resultado.grid(row=3,column=1,pady=10)
+        self.label_resultado.grid(row=5,column=2,pady=10)
         
         self.btn_contar = tk.Button(self, text="Contar Pedidos", command=lambda:on_click_contar_pedidos(self.entry_data,self.label_resultado))
-        self.btn_contar.grid(pady=10)
+        self.btn_contar.grid(row=5,column=1,pady=10)
+        
+        
+        
+        self.btn_contar = tk.Button(self, text="Baixar Pedidos", command=lambda:on_click_contar_pedidos(self.entry_data,self.label_resultado))
+        self.btn_contar.grid(row=6,column=1,pady=10)
+        
+        self.btn_contar = tk.Button(self, text="Organizar Pedidos", command=lambda:on_click_contar_pedidos(self.entry_data,self.label_resultado))
+        self.btn_contar.grid(row=7,column=1,pady=10)
+        
+        self.btn_contar = tk.Button(self, text="Imprimir Pedidos", command=lambda:on_click_contar_pedidos(self.entry_data,self.label_resultado))
+        self.btn_contar.grid(row=8,column=1,pady=10)
+        
+        
+        self.back_button = tk.Button(self, text="Voltar", command=self.callback)
+        self.back_button.grid(row=10, column=0)
+
         
         

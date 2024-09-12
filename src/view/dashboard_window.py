@@ -11,7 +11,6 @@ class DashboardWindow(tk.Frame):
         self.funcoes_acesso = funcoes_acesso
         self.return_to_main_menu = return_to_main_menu
         self.session = session  # Armazena a sessão
-
         self.create_widgets()
 
     def create_widgets(self):
@@ -24,17 +23,22 @@ class DashboardWindow(tk.Frame):
 
         # Título do Dashboard
         self.title_label = tk.Label(self, text=f"Bem-vindo, {self.username.title()}!", font=("Arial", 16))
-        self.title_label.grid(row=0, column=0, columnspan=2, pady=10)
-
+        self.title_label.grid(row=0, column=0, columnspan=2)
+        
         # Botões de funcionalidades baseados nas permissões
         if 'admin' in self.funcoes_acesso:
             self.function1_button = tk.Button(self, text="Cadastrar Usuário", command=self.show_cadastro_window)
-            self.function1_button.grid(row=1, column=0, padx=10, pady=10, sticky="ew")
+            self.function1_button.grid(row=1, column=0, padx=10, pady=0, sticky="ew")
 
-        if 'user' in self.funcoes_acesso:
-            self.function2_button = tk.Button(self, text="Funcionalidade 2", command=self.function2)
-            self.function2_button.grid(row=1, column=1, padx=10, pady=10, sticky="ew")
-
+        if 'user' or 'admin' in self.funcoes_acesso :
+            self.function2_button = tk.Button(self, text="Pedidos BRF", command=self.function2)
+            self.function2_button.grid(row=1, column=1, padx=10, pady=0, sticky="ew")
+        
+        if 'user' or 'admin' in self.funcoes_acesso :
+            self.function3_button = tk.Button(self, text="Pedidos BRF", command=self.function2)
+            self.function3_button.grid(row=1, column=1, padx=10, pady=0, sticky="ew")
+        
+        
         # Botão de logout
         self.logout_button = tk.Button(self, text="Logout", command=self.return_to_main_menu)
         self.logout_button.grid(row=2, column=0, columnspan=2, pady=20)
@@ -53,7 +57,7 @@ class DashboardWindow(tk.Frame):
 
     def function2(self):
         # Implementar a lógica para a funcionalidade 2
-        print("Funcionalidade 2")
+        print("Imprimir Pedidos BRF")
         self.clear_screen()  # Remove o conteúdo atual da tela
         pedidos_brf_window = PedidosBrfWindow(self, self.session, self.return_to_dashboard)  # Passa a sessão aqui
         pedidos_brf_window.grid(row=0, column=0, sticky="nsew")

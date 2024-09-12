@@ -19,8 +19,8 @@ class LoginFrame(tk.Frame):
         self.username_label = tk.Label(self, text="Usuário")
         self.username_label.grid(row=0, column=0, padx=10, pady=10, sticky="e")
 
-        self.username_entry = tk.Entry(self)
-        self.username_entry.grid(row=0, column=1, padx=10, pady=10, sticky="w")
+        self.username_entry = tk.Entry(self, takefocus=True)
+        self.username_entry.grid(row=0, column=1, padx=10, pady=10, sticky="w",)
 
         # Label e entrada para senha
         self.password_label = tk.Label(self, text="Senha")

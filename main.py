@@ -5,7 +5,7 @@ def main():
     # Configuração do banco de dados
     # Configuração da janela principal
     root = Window(themename="simplex")
-    root.title("TAC Etiquetas - Login")
+    root.title("TAC Etiquetas")
     root.geometry("350x200")
     root.resizable(False, False)
     
