@@ -29,7 +29,8 @@ class MainWindow(tk.Frame):
         dashboard.pack(fill="both", expand=True)
 
         # Configurações para maximizar e permitir redimensionamento
-        self.parent.geometry("800x600")  # Tamanho padrão para o dashboard
+        self.parent.geometry("600x400")  # Tamanho padrão para o dashboard
+        self.parent.title("TAC Etiquetas")  # Titulo do App
         self.parent.resizable(True, True)  # Permite redimensionamento
         self.parent.update_idletasks()  # Atualiza a janela para aplicar as mudanças
 
