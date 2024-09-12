@@ -1,0 +1,14 @@
+# Bytecode de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ambiente virtual
+.venv/
+
+data/
+src/controller/pedidos_brf/emailpedidos.py
+
+# Arquivos de configuração do IDE
+.vscode/
+.idea/
