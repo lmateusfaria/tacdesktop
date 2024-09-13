@@ -24,7 +24,7 @@ def gerenciar_contador_diario(diretorio_pedidos):
     with open(contador_path, 'w') as f:
         f.write(f"{date.today()},{contagem}")
     
-    return contagem
+    return contagem, contador_path
 
 # Função para criar o diretório de pedidos
 def criar_diretorio_pedidos(ano, mes, dia, qnt_vezes):
@@ -35,7 +35,10 @@ def criar_diretorio_pedidos(ano, mes, dia, qnt_vezes):
 # Função para baixar os pedidos
 def baixar_pedidos(dia, hora_inicio):
     nova_data = date.today().replace(day=dia)
-    caminho = criar_diretorio_pedidos(nova_data.year, nova_data.month, nova_data.day, gerenciar_contador_diario(Path('tacdesktop/data/pdf_pedidos_brf')))
+    
+    # Gerencia o contador diário e cria o diretório de pedidos
+    qnt_vezes, contador_path = gerenciar_contador_diario(Path('tacdesktop/data/pdf_pedidos_brf'))
+    caminho = criar_diretorio_pedidos(nova_data.year, nova_data.month, nova_data.day, qnt_vezes)
     
     bp = 0
     with MailBox('imap.terra.com').login(usuario, senha) as caixaEntrada:
@@ -48,6 +51,11 @@ def baixar_pedidos(dia, hora_inicio):
                         with open(caminho_completo, "wb") as arquivo_pdf:
                             arquivo_pdf.write(anexo.payload)
                         bp += 1
+    
+    # Move o arquivo de contador para a pasta dos PDFs após os downloads
+    contador_novo_path = caminho / contador_path.name
+    contador_path.rename(contador_novo_path)
+    
     return bp
 
 # Função para rodar a thread de baixar pedidos
