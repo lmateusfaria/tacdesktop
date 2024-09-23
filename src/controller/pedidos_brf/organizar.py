@@ -94,6 +94,7 @@ cidades = {
     ("VIDEIRA/SC", "01.838.723/0213-96"): "BRF/Videira",
     ("VIDEIRA/SC", "01.838.723/0224-49"): "BRF/Videira (Up300)87",
     ("VITORIA DE SANTO ANTAO/PE", "01.838.723/0346-17"): "BRF/Vitoria S.At(390)2999",
+    # Adicione as outras cidades conforme necessário...
 }
 
 # Funções auxiliares
@@ -130,11 +131,13 @@ def ajustar_nome_cidade(cidade_cliente):
         "CORREA/RS": "SERAFINA CORRÊA/RS",
         "VERDE/MT": "LUCAS DO RIO VERDE/MT",
         "VERDE/GO": "RIO VERDE/GO",
+
         "BELTRAO/PR": "FRANCISCO BELTRAO/PR",
         "VIZINHOS/PR": "DOIS VIZINHOS/PR",
         "ALEGRE/GO": "BURITI ALEGRE/GO",
         "GROSSA/PR": "PONTA GROSSA/PR",
-        "CAXIAS/RJ": "DUQUE DE CAXIAS/RJ"
+        "CAXIAS/RJ": "DUQUE DE CAXIAS/RJ",
+        "BELTRAO/PR": "FRANCISCO BELTRAO/PR"
         # Adicione outras substituições se necessário
     }
     return substituicoes.get(cidade_cliente, cidade_cliente)
@@ -257,8 +260,6 @@ def definir_pasta_destino(material_pedido, medida_pedido):
             return "./BOPP 75X75"
         
         else: return "./OUTROS"
-        # Adicione outras condições conforme necessário
-    return "./OUTROS"
 
 # Função principal de organização
 def organizar_pedidos(caminho_pdfs, entry_dia):
@@ -333,7 +334,10 @@ def organizar_pedidos_thread(entry_data, label_resultado):
         data_atual = datetime.strptime(entry_data.get(), "%d/%m/%Y")
         dia = data_atual.day
         caminho_pdfs = f"./data/pdf_pedidos_brf/{datetime.year}/{datetime.month}/{dia}"
-        
+        data_atual = datetime.now()
+        data_atual.day = entry_data
+        dia = datetime.strptime(entry_data.get(), "%d/%m/%Y").day
+        caminho_pdfs = f"./pdfs_a_organizar/{dia}"
         # Organizar os PDFs e obter o log de retorno
         log_retorno = organizar_pedidos(caminho_pdfs, data_atual)
         label_resultado.config(text="Organização concluída.")
@@ -350,3 +354,4 @@ def organizar_pedidos_thread(entry_data, label_resultado):
 def on_click_organizar_pedidos(entry_data, label_resultado):
     label_resultado.config(text="Organizando pedidos...")
     threading.Thread(target=organizar_pedidos_thread, args=(entry_data, label_resultado), daemon=True).start()
+
