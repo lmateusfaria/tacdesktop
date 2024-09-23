@@ -13,6 +13,7 @@ logging.basicConfig(filename="organizacao_pdfs.log", level=logging.INFO,
 
 # Lista de materiais e medidas
 material = ["NA", "NA01", "NA02", "AA01", "AA07", "AA08", "AA13", "ADESIVA"]
+<<<<<<< HEAD
 
 medidas_brf = [
     "45X230","230X45","230X45MM",
@@ -54,11 +55,18 @@ medidas_brf = [
     "045X232",
     "26X28",
 ]
+=======
+medidas_brf = ["45X230", "230X45", "250X100", "100X250", "240X170", "100X230", 
+               "220X100", "100X220", "100X210", "210X100", "210X70", "70X210", 
+               "200X104", "200X85", "85X200", "180X70", "95X60", "60X95", "45X60", 
+               "190X90", "240X75", "75X75", "100X220", "148X110"]
+>>>>>>> c4bd3f88e1d846152767f81f30ea4436c2e6d5e0
 
 # Dicionário de cidades e CNPJs
 cidades = {
     ("BURITI ALEGRE/GO", "01.838.723/0350-01"): "BRF/Buriti Alegre(Up391)",
     ("CAMPOS NOVOS/SC", "01.838.723/0309-72"): "BRF/C. Novos(Up316)160",
+<<<<<<< HEAD
     ("CAPINZAL/SC", "01.838.723/0154-00"): "BRF/Capinzal (Up312)466",
     ("CARAMBEI/PR", "01.838.723/0118-38"): "BRF/Carambei (Up350) 424",
     ("CHAPECO/SC", "01.838.723/0339-98"): "BRF/Chapecó(Up358)104",
@@ -94,6 +102,9 @@ cidades = {
     ("VIDEIRA/SC", "01.838.723/0213-96"): "BRF/Videira",
     ("VIDEIRA/SC", "01.838.723/0224-49"): "BRF/Videira (Up300)87",
     ("VITORIA DE SANTO ANTAO/PE", "01.838.723/0346-17"): "BRF/Vitoria S.At(390)2999",
+=======
+    # Adicione as outras cidades conforme necessário...
+>>>>>>> c4bd3f88e1d846152767f81f30ea4436c2e6d5e0
 }
 
 # Funções auxiliares
@@ -130,11 +141,15 @@ def ajustar_nome_cidade(cidade_cliente):
         "CORREA/RS": "SERAFINA CORRÊA/RS",
         "VERDE/MT": "LUCAS DO RIO VERDE/MT",
         "VERDE/GO": "RIO VERDE/GO",
+<<<<<<< HEAD
         "BELTRAO/PR": "FRANCISCO BELTRAO/PR",
         "VIZINHOS/PR": "DOIS VIZINHOS/PR",
         "ALEGRE/GO": "BURITI ALEGRE/GO",
         "GROSSA/PR": "PONTA GROSSA/PR",
         "CAXIAS/RJ": "DUQUE DE CAXIAS/RJ"
+=======
+        "BELTRAO/PR": "FRANCISCO BELTRAO/PR"
+>>>>>>> c4bd3f88e1d846152767f81f30ea4436c2e6d5e0
         # Adicione outras substituições se necessário
     }
     return substituicoes.get(cidade_cliente, cidade_cliente)
@@ -146,6 +161,7 @@ def formatar_data(data):
 
 def definir_pasta_destino(material_pedido, medida_pedido):
     """Define a pasta de destino baseada no material e medida."""
+<<<<<<< HEAD
     if any(mat in material_pedido for mat in ["AA01","AA13", "ADESIVA"]):
         if (re.search("250X100",medida_pedido) or re.search("100X250",medida_pedido)):
             return"./TRANST 250X100"    
@@ -257,6 +273,13 @@ def definir_pasta_destino(material_pedido, medida_pedido):
             return "./BOPP 75X75"
         
         else: return "./OUTROS"
+=======
+    if any(mat in material_pedido for mat in ["AA01", "ADESIVA"]):
+        if "250X100" in medida_pedido:
+            return "./TRANST 250X100"
+        elif "240X170" in medida_pedido:
+            return "./TRANST 240X170"
+>>>>>>> c4bd3f88e1d846152767f81f30ea4436c2e6d5e0
         # Adicione outras condições conforme necessário
     return "./OUTROS"
 
@@ -330,10 +353,18 @@ def exibir_relatorio(log_retorno):
 # Função para organizar os pedidos em uma thread
 def organizar_pedidos_thread(entry_data, label_resultado):
     try:
+<<<<<<< HEAD
         data_atual = datetime.strptime(entry_data.get(), "%d/%m/%Y")
         dia = data_atual.day
         caminho_pdfs = f"./data/pdf_pedidos_brf/{datetime.year}/{datetime.month}/{dia}"
         
+=======
+        data_atual = datetime.now()
+        data_atual.day = entry_data
+        dia = datetime.strptime(entry_data.get(), "%d/%m/%Y").day
+        caminho_pdfs = f"./pdfs_a_organizar/{dia}"
+        1
+>>>>>>> c4bd3f88e1d846152767f81f30ea4436c2e6d5e0
         # Organizar os PDFs e obter o log de retorno
         log_retorno = organizar_pedidos(caminho_pdfs, data_atual)
         label_resultado.config(text="Organização concluída.")
@@ -349,4 +380,8 @@ def organizar_pedidos_thread(entry_data, label_resultado):
 # Função que será chamada pelo botão de organizar
 def on_click_organizar_pedidos(entry_data, label_resultado):
     label_resultado.config(text="Organizando pedidos...")
+<<<<<<< HEAD
     threading.Thread(target=organizar_pedidos_thread, args=(entry_data, label_resultado), daemon=True).start()
+=======
+    threading.Thread(target=organizar_pedidos_thread, args=(entry_data, label_resultado), daemon=True).start()
+>>>>>>> c4bd3f88e1d846152767f81f30ea4436c2e6d5e0

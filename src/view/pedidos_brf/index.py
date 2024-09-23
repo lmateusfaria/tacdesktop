@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from src.controller.pedidos_brf.contar import on_click_contar_pedidos
 from src.controller.pedidos_brf.baixar import on_click_baixar_pedidos
+from src.controller.pedidos_brf.organizar import on_click_organizar_pedidos  # Importar a função para organizar
 from src.controller.components.placeholderentry import PlaceholderEntry
 from datetime import datetime, date, time as dt_time
 
@@ -92,12 +93,12 @@ class PedidosBrfWindow(tk.Frame):
             on_click_contar_pedidos(self.entry_data, self.label_resultado, self.entry_hora_inicio)
         elif btn_type == "baixar":
             on_click_baixar_pedidos(self.entry_data, self.label_baixados, self.entry_hora_inicio)
-        #elif btn_type == "organizar":
-            #on_click_organizar_pedidos()
-        #elif btn_type == "imprimir":
-            #on_click_imprimir_pedidos()
-            
-
+        elif btn_type == "organizar":
+            on_click_organizar_pedidos(self.entry_data, self.label_organizados)  # Adicionar chamada para organizar
+        elif btn_type == "imprimir":
+            #on_click_imprimir_pedidos(self.entry_data, self.label_impressos)  # Adicionar chamada para imprimir
+            pass
+        
     def validate_time_input(self, value, min_value, max_value, field_name):
         """Valida se a entrada de tempo está dentro dos limites especificados."""
         if not value.isdigit():

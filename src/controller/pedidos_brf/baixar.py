@@ -127,3 +127,5 @@ def baixar_pedidos_thread(entry_dia, label_resultado, entry_hora_inicio):
 def on_click_baixar_pedidos(entry_data, label_resultado, entry_hora_inicio):
     label_resultado.config(text="Baixando pedidos...")
     threading.Thread(target=baixar_pedidos_thread, args=(entry_data, label_resultado, entry_hora_inicio), daemon=True).start()
+
+#teste branch tac
