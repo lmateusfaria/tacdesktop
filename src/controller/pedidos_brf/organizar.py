@@ -96,7 +96,6 @@ cidades = {
     ("VITORIA DE SANTO ANTAO/PE", "01.838.723/0346-17"): "BRF/Vitoria S.At(390)2999",
     # Adicione as outras cidades conforme necessário...
 }
-
 # Funções auxiliares
 def encontrar_material(descricao):
     """Busca materiais na descrição usando regex."""
