@@ -328,14 +328,14 @@ def exibir_relatorio(log_retorno):
     scrollbar.pack(side="right", fill="y")
 
 # Função para organizar os pedidos em uma thread
-def organizar_pedidos_thread(entry_data, label_resultado):
+def organizar_pedidos_thread(entry_dia, label_resultado):
     try:
-        data_atual = datetime.strptime(entry_data.get(), "%d/%m/%Y")
+        data_atual = datetime.strptime(entry_dia.get(), "%d/%m/%Y")
         dia = data_atual.day
         caminho_pdfs = f"./data/pdf_pedidos_brf/{datetime.year}/{datetime.month}/{dia}"
         data_atual = datetime.now()
-        data_atual.day = entry_data
-        dia = datetime.strptime(entry_data.get(), "%d/%m/%Y").day
+        data_atual.day = entry_dia
+        dia = datetime.strptime(entry_dia.get(), "%d/%m/%Y").day
         caminho_pdfs = f"./pdfs_a_organizar/{dia}"
         # Organizar os PDFs e obter o log de retorno
         log_retorno = organizar_pedidos(caminho_pdfs, data_atual)
@@ -350,7 +350,7 @@ def organizar_pedidos_thread(entry_data, label_resultado):
         messagebox.showerror("Erro", f"Erro inesperado: {str(e)}")
 
 # Função que será chamada pelo botão de organizar
-def on_click_organizar_pedidos(entry_data, label_resultado):
+def on_click_organizar_pedidos(entry_dia, label_resultado):
     label_resultado.config(text="Organizando pedidos...")
-    threading.Thread(target=organizar_pedidos_thread, args=(entry_data, label_resultado), daemon=True).start()
+    threading.Thread(target=organizar_pedidos_thread, args=(entry_dia, label_resultado), daemon=True).start()
 

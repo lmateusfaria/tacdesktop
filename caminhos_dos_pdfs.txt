@@ -1,0 +1,4 @@
+Pasta: ./data/pdf_pedidos_brf/2024\09\12\1x, Primeiro PDF: ./data/pdf_pedidos_brf/2024\09\12\1x\Novo Pedido BRF 109610385.pdf
+Pasta: ./data/pdf_pedidos_brf/2024\09\13\1x, Primeiro PDF: ./data/pdf_pedidos_brf/2024\09\13\1x\Novo Pedido BRF 109619030.pdf
+Pasta: ./data/pdf_pedidos_brf/2024\09\16\1x, Primeiro PDF: ./data/pdf_pedidos_brf/2024\09\16\1x\Novo Pedido BRF 109626137.pdf
+Pasta: ./data/pdf_pedidos_brf/2024\09\20\1x, Primeiro PDF: ./data/pdf_pedidos_brf/2024\09\20\1x\Novo Pedido BRF 109654850.pdf
